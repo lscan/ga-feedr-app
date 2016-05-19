@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Reddit API app</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+</head>
+<body>
+  <div class="container-fluid sign-in-view">
+    <div class="row text-center">
+      <h1>Click to see some Reddit stuff!</h1>
+      <button class="btn btn-default">
+        <a href="https://www.reddit.com/api/v1/authorize?client_id=lFZBkKj4kfJqrw&response_type=token&state=whatever&redirect_uri=http://localhost:3000&scope=read">
+          Click Here
+        </a>
+      </button>
+    </div>
+  </div>
+  <div class="container-fluid text-center article-results-view">
+    <h1>Here are some posts from Reddit:</h1>
+    <div class="articles"></div>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
