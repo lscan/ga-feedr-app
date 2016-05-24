@@ -1,6 +1,7 @@
 var token;
 var userInfo;
 var rAllData;
+var listingData;
 $.ready(isRedirectedURI())
 
 function isRedirectedURI() {
@@ -57,6 +58,46 @@ function isRedirectedURI() {
 			});
 		})();*/
 		//end vote
+
+		//get listing data by user input
+		function getListingData() {
+			var redditEndpoint = "https://www.reddit.com/r/";
+			redditEndpoint = redditEndpoint + $('#subredditValue').val() + "/hot.json?limit=10"
+
+			$.ajax({
+				url: redditEndpoint,
+				method: 'GET',
+				dataType: 'jsonp',
+				success: function(response) {
+					console.log(response);
+					listingData = response;
+				},
+				error: function(jqXHR, exception) {
+					var msg = '';
+	        if (jqXHR.status === 0) {
+	            msg = 'Not connect. Verify Network.';
+	        } else if (jqXHR.status == 404) {
+	            msg = 'Requested page not found. [404]';
+	        } else if (jqXHR.status == 500) {
+	            msg = 'Internal Server Error [500].';
+	        } else if (exception === 'parsererror') {
+	            msg = 'Requested JSON parse failed.';
+	        } else if (exception === 'timeout') {
+	            msg = 'Time out error.';
+	        } else if (exception === 'abort') {
+	            msg = 'Ajax request aborted.';
+	        } else {
+	            msg = 'Uncaught Error. ' + jqXHR.responseText;
+	        }
+	        $('#errorMessage').text(msg);
+				}
+			});
+		}
+		//end getListingData
+
+		$('#subredditButton').on('click', function() {
+			getListingData();
+		});
 
 	}
 	else {
