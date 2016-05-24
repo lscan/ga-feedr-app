@@ -5,7 +5,6 @@ var listingData;
 $.ready(isRedirectedURI())
 
 function isRedirectedURI() {
-	$('.sign-in-view').hide();
 	uriHash = window.location.hash;
 	if(uriHash.length>0) {
 		
@@ -43,22 +42,6 @@ function isRedirectedURI() {
 			});
 		})();
 
-		//example vote on a post
-		/*(function() {
-			var redditEndpoint = "https://oauth.reddit.com/api/vote?dir=1&id=t3_4kqr3d";
-			var redditHeaders = {"Authorization": "bearer " + token};
-			$.ajax({
-				url: redditEndpoint,
-				headers: redditHeaders,
-				method: 'POST',
-				dataType: 'json',
-				success: function(response) {
-					console.log(response);
-				}
-			});
-		})();*/
-		//end vote
-
 		//templating js
 		var templating = {};
 		templating.compileItem = function(item) {
@@ -87,7 +70,7 @@ function isRedirectedURI() {
 		//get listing data by user input
 		function getListingData() {
 			var redditEndpoint = "https://www.reddit.com/r/";
-			redditEndpoint = redditEndpoint + $('#subredditValue').val() + "/new.json?limit=10"
+			redditEndpoint = redditEndpoint + $('#subredditValue').val() + "/hot.json?limit=10"
 
 			$.ajax({
 				url: redditEndpoint,
@@ -124,6 +107,33 @@ function isRedirectedURI() {
 		$('#subredditButton').on('click', function() {
 			getListingData();
 		});
+		$('body').on('click', '.upvote-arrow', function() {
+			var redditEndpoint = $(this).attr('data');
+			var redditHeaders = {"Authorization": "bearer " + token};
+			$.ajax({
+				url: redditEndpoint,
+				headers: redditHeaders,
+				method: 'POST',
+				dataType: 'json',
+				success: function(response) {
+					console.log(response);
+				}
+			});
+		});
+		$('body').on('click', '.downvote-arrow', function() {
+			var redditEndpoint = $(this).attr('data');
+			var redditHeaders = {"Authorization": "bearer " + token};
+			$.ajax({
+				url: redditEndpoint,
+				headers: redditHeaders,
+				method: 'POST',
+				dataType: 'json',
+				success: function(response) {
+					console.log(response);
+				}
+			});
+		});
+		
 
 	}
 	else {

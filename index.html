@@ -9,30 +9,40 @@
 <body>
   <div class="container-fluid sign-in-view">
     <div class="row text-center">
-      <h1>Click to see some Reddit stuff!</h1>
-      <button class="btn btn-default">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+        <h1>Click to see some Reddit stuff!</h1>
+        <button class="btn btn-default">
         <a href="https://www.reddit.com/api/v1/authorize?client_id=lFZBkKj4kfJqrw&response_type=token&state=whatever&redirect_uri=http://localhost:3000&scope=mysubreddits identity read vote">
           Click Here
         </a>
       </button>
+      </div>
+      <div class="col-md-2"></div>
     </div>
   </div>
   <div class="container-fluid text-center article-results-view">
-    <h1>Here are some posts from Reddit:</h1>
-    <div class="articles">
-      <input type="text" id="subredditValue"></input>
-      <input type="button" value="Submit" id="subredditButton"></input>
-      <ul id="articleListing"></ul>
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+        <h1>Here are some posts from Reddit:</h1>
+        <div class="articles">
+          <input type="text" id="subredditValue"></input>
+          <input type="button" value="Submit" id="subredditButton"></input>
+          <ul id="articleListing"></ul>
+        </div>
+      </div>
+      <div class="col-md-2"></div>
     </div>
   </div>
   <script id="vote-template" type="text/x-handlebars-template">
     <li class="">
-      <a class="upvote-arrow" href={{upvoteEndpoint}}>Upvote</a>
+      <a class="upvote-arrow" href="javascript:;" data={{upvoteEndpoint}}>Upvote</a>
+      <a class="downvote-arrow" href="javascript:;" data={{downvoteEndpoint}}>Downvote</a>
       <div>
         <img src="{{thumbnail}}">
         <span>{{title}}</span>
       </div>
-      <a class="downvote-arrow" href={{downvoteEndpoint}}>Downvote</a>
     </li>
   </script>
   <script type="text/javascript" src="handlebars-v4.0.5.js"></script>
