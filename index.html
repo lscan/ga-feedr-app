@@ -5,7 +5,6 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   <link rel="stylesheet" href="style.css">
   <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-  <script type="text/javascript" src="handlebars-v4.0.5.js"></script>
 </head>
 <body>
   <div class="container-fluid sign-in-view">
@@ -23,9 +22,20 @@
     <div class="articles">
       <input type="text" id="subredditValue"></input>
       <input type="button" value="Submit" id="subredditButton"></input>
-      <p id="errorMessage"></p>
+      <ul id="articleListing"></ul>
     </div>
   </div>
+  <script id="vote-template" type="text/x-handlebars-template">
+    <li class="">
+      <a class="upvote-arrow" href={{upvoteEndpoint}}></a>
+      <div>
+        <img src="{{thumbnail}}">
+        <span>{{title}}</span>
+      </div>
+      <a class="downvote-arrow" href={{downvoteEndpoint}}></a>
+    </li>
+  </script>
+  <script type="text/javascript" src="handlebars-v4.0.5.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

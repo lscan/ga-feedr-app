@@ -29,19 +29,18 @@ function isRedirectedURI() {
 		//end /api/v1/me
 
 		//get top posts on r/all
-		(function() {
-			var redditEndpoint = "https://www.reddit.com/r/all/hot.json";
-			$.ajax({
-				url: redditEndpoint,
-				method: 'GET',
-				dataType: 'json',
-				success: function(response) {
-					console.log(response);
-					rAllData = response;
-				}
-			});
-		})();
-		//end /r/all/hot
+		// (function() {
+		// 	var redditEndpoint = "https://www.reddit.com/r/all/hot.json";
+		// 	$.ajax({
+		// 		url: redditEndpoint,
+		// 		method: 'GET',
+		// 		dataType: 'json',
+		// 		success: function(response) {
+		// 			console.log(response);
+		// 			rAllData = response;
+		// 		}
+		// 	});
+		// })();
 
 		//example vote on a post
 		/*(function() {
@@ -59,6 +58,31 @@ function isRedirectedURI() {
 		})();*/
 		//end vote
 
+		//templating js
+		var templating = {};
+		templating.compileItem = function(item) {
+			var source = $('#vote-template').html();
+			var template = Handlebars.compile(source);
+			return template(item);
+		}
+		templating.voteBaseUrl = "https://oauth.reddit.com/api/vote?";
+		templating.listingItems = [];
+		templating.iterate = function(dataArray) {
+			for(var i=0; i<dataArray.length; i++) {
+				var newObject = {};
+				newObject.upvoteEndpoint = templating.voteBaseUrl+"dir=1&id="+dataArray[i].data.name;
+				newObject.downvoteEndpoint = templating.voteBaseUrl+"dir=-1&id="+dataArray[i].data.name;
+				newObject.title = dataArray[i].data.title;
+				newObject.thumbnail = dataArray[i].data.thumbnail;
+				templating.listingItems.push(newObject);
+			}
+			for(var i=0; i<templating.listingItems.length; i++) {
+				var newItem = templating.compileItem(templating.listingItems[i]);
+				$('#articleListing').append(newItem);
+			}
+		}
+		//end templating
+
 		//get listing data by user input
 		function getListingData() {
 			var redditEndpoint = "https://www.reddit.com/r/";
@@ -67,10 +91,11 @@ function isRedirectedURI() {
 			$.ajax({
 				url: redditEndpoint,
 				method: 'GET',
-				dataType: 'jsonp',
+				dataType: 'json',
 				success: function(response) {
 					console.log(response);
 					listingData = response;
+					templating.iterate(listingData.data.children);
 				},
 				error: function(jqXHR, exception) {
 					var msg = '';
