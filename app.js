@@ -5,6 +5,7 @@ var listingData;
 $.ready(isRedirectedURI())
 
 function isRedirectedURI() {
+	$('.sign-in-view').hide();
 	uriHash = window.location.hash;
 	if(uriHash.length>0) {
 		
@@ -29,18 +30,18 @@ function isRedirectedURI() {
 		//end /api/v1/me
 
 		//get top posts on r/all
-		// (function() {
-		// 	var redditEndpoint = "https://www.reddit.com/r/all/hot.json";
-		// 	$.ajax({
-		// 		url: redditEndpoint,
-		// 		method: 'GET',
-		// 		dataType: 'json',
-		// 		success: function(response) {
-		// 			console.log(response);
-		// 			rAllData = response;
-		// 		}
-		// 	});
-		// })();
+		(function() {
+			var redditEndpoint = "https://www.reddit.com/r/all/hot.json";
+			$.ajax({
+				url: redditEndpoint,
+				method: 'GET',
+				dataType: 'json',
+				success: function(response) {
+					console.log(response);
+					rAllData = response;
+				}
+			});
+		})();
 
 		//example vote on a post
 		/*(function() {
@@ -86,7 +87,7 @@ function isRedirectedURI() {
 		//get listing data by user input
 		function getListingData() {
 			var redditEndpoint = "https://www.reddit.com/r/";
-			redditEndpoint = redditEndpoint + $('#subredditValue').val() + "/hot.json?limit=10"
+			redditEndpoint = redditEndpoint + $('#subredditValue').val() + "/new.json?limit=10"
 
 			$.ajax({
 				url: redditEndpoint,
