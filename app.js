@@ -1,3 +1,7 @@
+// to do:
+// pagination
+// undo vote
+
 var token;
 var userInfo;
 var rAllData;
@@ -6,6 +10,7 @@ $.ready(isRedirectedURI())
 
 function isRedirectedURI() {
 	uriHash = window.location.hash;
+	// if redirected with token
 	if(uriHash.length>0) {
 		
 		//set access token
@@ -21,28 +26,13 @@ function isRedirectedURI() {
 				method: 'GET',
 				dataType: 'json',
 				success: function(response) {
-					console.log(response);
 					userInfo = response;
 				}
 			});
 		})();
 		//end /api/v1/me
 
-		//get top posts on r/all
-		(function() {
-			var redditEndpoint = "https://www.reddit.com/r/all/hot.json";
-			$.ajax({
-				url: redditEndpoint,
-				method: 'GET',
-				dataType: 'json',
-				success: function(response) {
-					console.log(response);
-					rAllData = response;
-				}
-			});
-		})();
-
-		//templating js
+		// templating
 		var templating = {};
 		templating.compileItem = function(item) {
 			var source = $('#vote-template').html();
@@ -69,14 +59,20 @@ function isRedirectedURI() {
 
 		//get listing data by user input
 		function getListingData() {
-			var redditEndpoint = "https://www.reddit.com/r/";
+			
+			// need to hit oauth.reddit.com in order to get certain user info, like the likes attr
+			var redditEndpoint = "https://oauth.reddit.com/r/";
+			var redditHeaders = {"Authorization": "bearer " + token};
 			redditEndpoint = redditEndpoint + $('#subredditValue').val() + "/hot.json?limit=10"
 
 			$.ajax({
 				url: redditEndpoint,
+				headers: redditHeaders,
 				method: 'GET',
+				// jsonp doesn't work here
 				dataType: 'json',
 				success: function(response) {
+					console.log('listing object: ');
 					console.log(response);
 					listingData = response;
 					templating.iterate(listingData.data.children);
@@ -136,6 +132,7 @@ function isRedirectedURI() {
 		
 
 	}
+	// no token :(
 	else {
 		$('.article-results-view').hide();
 	}
