@@ -1,0 +1,91 @@
+/*darker blue: #5f99cf
+lighter blue: #F0F3FC
+titles are blue (just the keyword)
+visited links: #551a8b
+domains and info (like submitted x amount of time ago and # of comments, share/save/hide etc) are are #888
+usernames and subreddits are #369*/
+
+$color-dark-blue: #5f99cf;
+$color-light-blue: #F0F3FC;
+$color-title: blue;
+$color-visited: #551a8b;
+$color-info: #888;
+$color-username: #369;
+
+
+body {
+  // background: $color-username;
+}
+.article-results-view {}
+.article-results-view ul {
+	list-style-type: none;
+	margin-top: 20px;
+}
+#articleListing li {
+	position: relative;
+	min-height: 140px;
+	border: 1px solid blue;
+}
+#articleListing .upvote-arrow {
+	position: absolute;
+	left: 0;
+}
+#articleListing .downvote-arrow {
+	position: absolute;
+	right: 0;
+}
+#articleListing li img {
+	display: block;
+	margin: 0 auto;
+}
+#articleListing li span {
+	display: block;
+	margin: 0 auto;
+}
+nav {
+	background: red;
+	ul {
+		background: white;
+	}
+	li {
+		background: blue;
+	}
+}
+.vote-section {
+	float: left;
+	margin: .2em .5em;
+}
+.arrow {
+	background-position: center center;
+	background-repeat: no-repeat; 
+	cursor: pointer;
+	display: block;
+	height: 14px;
+	margin: 2px 0px 0px 0px;
+	width: 100%;
+	width: 15px;
+	margin-left: auto;
+	margin-right: auto; 
+	// float: left;
+	display: block;
+}
+.arrow.upmod { 
+	background-image: url(/static/sprite.png?);
+	// background-position: -4px -227px;
+	background-position: -62px -864px;
+}
+.arrow.downmod { 
+	background-image: url(/static/sprite.png);
+	// background-position: -4px -249px;
+	background-position: -20px -864px;
+}
+.arrow.up { 
+	background-image: url(/static/sprite.png?);
+	// background-position: -4px -271px;
+	background-position: -41px -864px;
+}
+.arrow.down { 
+	background-image: url(/static/sprite.png?);
+	// background-position: -4px -293px;
+	background-position: 1px -864px;
+}
