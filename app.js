@@ -166,8 +166,9 @@ function isRedirectedURI() {
 			// this listener should be attached to any upvoted arrows
 			this.className = this.className.replace('upmod', 'up');
 			var currentData = this.getAttribute('data');
+			console.log('nullifyUpvote currentData: ' + currentData);
 			postVote(currentData);
-			this.setAttribute('href', currentData.replace('dir=0', 'dir=1'));
+			this.setAttribute('data', currentData.replace('dir=0', 'dir=1'));
 			this.removeEventListener('click', nullifyUpvote);
 			this.addEventListener('click', addUpvote);
 		}
@@ -176,8 +177,9 @@ function isRedirectedURI() {
 			// this listener should be attached to any downvoted arrows
 			this.className = this.className.replace('downmod', 'down');
 			var currentData = this.getAttribute('data');
+			console.log('nullifyDownvote currentData: ' + currentData);
 			postVote(currentData);
-			this.setAttribute('href', currentData.replace('dir=0', 'dir=-1'));
+			this.setAttribute('data', currentData.replace('dir=0', 'dir=-1'));
 			this.removeEventListener('click', nullifyDownvote);
 			this.addEventListener('click', addDownvote);
 		}
@@ -186,8 +188,9 @@ function isRedirectedURI() {
 			// this listener should be added to any non-voted upvote arrows
 			this.className = this.className.replace('up', 'upmod');
 			var currentData = this.getAttribute('data');
+			console.log('addUpvote currentData: ' + currentData);
 			postVote(currentData);
-			this.setAttribute('href', currentData.replace('dir=1', 'dir=0'));
+			this.setAttribute('data', currentData.replace('dir=1', 'dir=0'));
 			this.removeEventListener('click', addUpvote);
 			this.addEventListener('click', nullifyUpvote);
 			// if post was previously downvoted:
@@ -196,7 +199,7 @@ function isRedirectedURI() {
 			if(matchingDownvote) {
 				matchingDownvote.className = matchingDownvote.className.replace('downmod', 'down');
 				var currentData = matchingDownvote.getAttribute('data');
-				matchingDownvote.setAttribute('href', currentData.replace('dir=0', 'dir=-1'));
+				matchingDownvote.setAttribute('data', currentData.replace('dir=0', 'dir=-1'));
 				matchingDownvote.removeEventListener('click', nullifyDownvote);
 				matchingDownvote.addEventListener('click', addDownvote);
 			}
@@ -206,8 +209,9 @@ function isRedirectedURI() {
 			// this listener should be added to any non-voted downvote arrows
 			this.className = this.className.replace('down', 'downmod');
 			var currentData = this.getAttribute('data');
+			console.log('addDownvote currentData: ' + currentData);
 			postVote(currentData);
-			this.setAttribute('href', currentData.replace('dir=-1', 'dir=0'));
+			this.setAttribute('data', currentData.replace('dir=-1', 'dir=0'));
 			this.removeEventListener('click', addDownvote);
 			this.addEventListener('click', nullifyDownvote);
 			// if post was previously upvoted:
@@ -216,7 +220,7 @@ function isRedirectedURI() {
 			if(matchingUpvote) {
 				matchingUpvote.className = matchingUpvote.className.replace('upmod', 'up');
 				var currentData = matchingUpvote.getAttribute('data');
-				matchingUpvote.setAttribute('href', currentData.replace('dir=0', 'dir=1'));
+				matchingUpvote.setAttribute('data', currentData.replace('dir=0', 'dir=1'));
 				matchingUpvote.removeEventListener('click', nullifyUpvote);
 				matchingUpvote.addEventListener('click', addUpvote);
 			}
