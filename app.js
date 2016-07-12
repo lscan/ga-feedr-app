@@ -69,7 +69,12 @@ function isRedirectedURI() {
 					newObject.downvoteEndpoint = templating.voteBaseUrl+"dir=-1&id="+dataArray[i].data.name;
 				}
 				newObject.title = dataArray[i].data.title;
-				newObject.thumbnail = dataArray[i].data.thumbnail;
+				newObject.domain = dataArray[i].data.domain;
+				if(dataArray[i].data.thumbnail == "self") {
+					newObject.thumbnailClass = "selfPost";
+				} else {
+					newObject.thumbnail = dataArray[i].data.thumbnail;
+				}
 				newObject.score = dataArray[i].data.score;
 				templating.listingItems.push(newObject);
 			}
@@ -85,7 +90,6 @@ function isRedirectedURI() {
 			}
 			var modDownvotes = document.getElementsByClassName('downmod');
 			for(var i=0; i<modDownvotes.length; i++) {
-				// console.log(modDownvotes[i]);
 				modDownvotes[i].addEventListener('click', nullifyDownvote);
 			}
 			var nonUpvotes = document.getElementsByClassName('up');
@@ -146,19 +150,6 @@ function isRedirectedURI() {
 		$('#subredditButton').on('click', function() {
 			getListingData();
 		});
-		// $('body').on('click', '.arrow', function() {
-		// 	var redditEndpoint = $(this).attr('data');
-		// 	var redditHeaders = {"Authorization": "bearer " + token};
-		// 	$.ajax({
-		// 		url: redditEndpoint,
-		// 		headers: redditHeaders,
-		// 		method: 'POST',
-		// 		dataType: 'json',
-		// 		success: function(response) {
-		// 			console.log(response);
-		// 		}
-		// 	});
-		// });
 
 		// listener functions
 		function nullifyUpvote(e) {
@@ -239,6 +230,17 @@ function isRedirectedURI() {
 					console.log(response);
 				}
 			});
+		}
+		function convertEpoch(createdUTC) {
+			// Create a new JavaScript Date object based on the timestamp
+			// multiplied by 1000 so that the argument is in milliseconds, not seconds.
+			var date = new Date(unix_timestamp*1000);
+			// Hours part from the timestamp
+			var hours = date.getHours();
+			// Minutes part from the timestamp
+			var minutes = "0" + date.getMinutes();
+			// Seconds part from the timestamp
+			var seconds = "0" + date.getSeconds();
 		}
 
 	}

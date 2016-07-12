@@ -11,8 +11,8 @@
 <body>
   <div class="container-fluid sign-in-view">
     <div class="row text-center">
-      <div class="col-md-2"></div>
-      <div class="col-md-8">
+      <div class="col-md-3"></div>
+      <div class="col-md-6">
         <h1>Click to see some Reddit stuff!</h1>
         <button class="btn btn-default">
         <a href="https://www.reddit.com/api/v1/authorize?client_id=lFZBkKj4kfJqrw&response_type=token&state=whatever&redirect_uri=http://localhost:3000&scope=mysubreddits identity read vote">
@@ -20,13 +20,13 @@
         </a>
       </button>
       </div>
-      <div class="col-md-2"></div>
+      <div class="col-md-3"></div>
     </div>
   </div>
   <div class="container-fluid text-center article-results-view">
     <div class="row">
-      <div class="col-md-2"></div>
-      <div class="col-md-8">
+      <div class="col-md-3"></div>
+      <div class="col-md-6">
         <h1>Here are some posts from Reddit:</h1>
         <div class="articles">
           <input type="text" id="subredditValue"></input>
@@ -34,7 +34,7 @@
           <ul id="articleListing"></ul>
         </div>
       </div>
-      <div class="col-md-2"></div>
+      <div class="col-md-3"></div>
     </div>
   </div>
   <script id="vote-template" type="text/x-handlebars-template">
@@ -45,10 +45,8 @@
         <div class="score">{{score}}</div>
         <a class="arrow {{downvoted}}" href="javascript:;" data={{downvoteEndpoint}}></a>
       </div>
-      <div>
-        <img src="{{thumbnail}}">
-        <span>{{title}}</span>
-      </div>
+      <img class="thumbnail {{thumbnailClass}}" src="{{thumbnail}}">
+      <h4 class="post-title">{{title}}&nbsp;&nbsp;&nbsp;<span class="domain">({{domain}})</span></h4>
     </li>
   </script>
   <script type="text/javascript" src="handlebars-v4.0.5.js"></script>

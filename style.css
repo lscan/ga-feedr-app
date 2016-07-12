@@ -8,10 +8,14 @@ usernames and subreddits are #369*/
   list-style-type: none;
   margin-top: 20px; }
 
-#articleListing li {
+#articleListing {
+  text-align: left; }
+
+#articleListing > li {
   position: relative;
-  min-height: 140px;
-  border: 1px solid blue; }
+  border: 1px solid blue;
+  display: flex;
+  align-items: center; }
 
 #articleListing .upvote-arrow {
   position: absolute;
@@ -22,12 +26,7 @@ usernames and subreddits are #369*/
   right: 0; }
 
 #articleListing li img {
-  display: block;
-  margin: 0 auto; }
-
-#articleListing li span {
-  display: block;
-  margin: 0 auto; }
+  display: inline-block; }
 
 nav {
   background: red; }
@@ -37,7 +36,9 @@ nav {
     background: blue; }
 
 .vote-section {
-  float: left; }
+  float: left;
+  margin: .2em .5em;
+  min-width: 52px; }
 
 .arrow {
   background-position: center center;
@@ -67,5 +68,26 @@ nav {
 .arrow.down {
   background-image: url(/static/sprite.png?);
   background-position: 1px -864px; }
+
+.selfPost {
+  width: 70px;
+  height: 50px;
+  background-image: url(/static/sprite.png?);
+  background-position: 0px -491px;
+  background-repeat: no-repeat; }
+
+.post-title {
+  display: inline-block;
+  max-width: 80%;
+  align-self: flex-start;
+  color: blue; }
+
+.score {
+  text-align: center; }
+
+.domain {
+  color: #888;
+  text-decoration: none;
+  font-size: .65em; }
 
 /*# sourceMappingURL=style.css.map */
